@@ -1,4 +1,4 @@
-import discord, os
+import discord, os, time
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -9,7 +9,10 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
+    channel = client.get_channel(814559928340447243)
     print('Murasame has logged in!')
+    await channel.send('Murasame-chan is now online!')
+
 
 @client.event
 async def on_message(message):
@@ -24,7 +27,13 @@ async def on_message(message):
 
     if message.content.startswith('Do you want to stay with me?'):
         await message.channel.send('Well, master...')
+        time.sleep(1)
         await message.channel.send('I am sure we can....')
+        time.sleep(1)
         await message.channel.send('Hehe hehe')
+
+    if message.content.startswith('!Shutdown'):
+        await message.channel.send('Shutting down...')
+        await client.logout()
 
 client.run(TOKEN)
