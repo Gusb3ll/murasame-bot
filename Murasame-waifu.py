@@ -55,13 +55,13 @@ async def on_message(message):
         await message.channel.send('Hehe hehe')
 
     if any(word in msg for word in capital_M):
-        await message.channel.send("Hey! Don't forget to capitalize the M.")
+        await message.channel.send("Hey! Don't forget to capitalize the **M**")
 
     if msg.startswith('$Murasamemaru'):
         await asyncio.sleep(2)
-        await message.channel.send("Hmmph, nice question.")
+        await message.channel.send("Hmmph, nice question")
         await asyncio.sleep(4)
-        await message.channel.send("Murasamemaru is a devine sword given to this village by the god.")
+        await message.channel.send("Murasamemaru is a devine sword given to this village by the god")
         await asyncio.sleep(3)
         await message.channel.send("They say that, this sword have potential to purified the curse spirit")
         await asyncio.sleep(2)
