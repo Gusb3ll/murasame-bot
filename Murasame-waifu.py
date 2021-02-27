@@ -12,6 +12,8 @@ client = discord.Client()
 shutdown_words_head = ["!shutdown", "!Shutdown", "!SHUTDOWN"]
 shutdown_words_res = ["See ya!", "Love you, master!", "<3"]
 
+capital_M = ["$murasamemaru", "$murasama"]
+
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -32,7 +34,7 @@ async def on_message(message):
     msg = message.content
 
     if msg.startswith('$help'):
-        await message.channel.send('Available commands : $quote')
+        await message.channel.send('Available commands : $quote, $Murasamemaru, $Murasama')
 
     if msg.startswith('Hi'):
         await message.channel.send('Hello, my master!')
@@ -49,6 +51,23 @@ async def on_message(message):
         await message.channel.send('I am sure we can....')
         time.sleep(1)
         await message.channel.send('Hehe hehe')
+
+    if any(word in msg for word in capital_M):
+        await message.channel.send("Hey! Don't forget to capitalize the M!!")
+
+    if msg.startswith('$Murasamemaru'):
+        await message.channel.send("Hmmph, nice question.")
+        time.sleep(4)
+        await message.channel.send("Murasamemaru is a devine sword given to this village by the god.")
+        time.sleep(2)
+        await message.channel.send("They say that, this sword have potential to purified the curse spirit")
+        time.sleep(2)
+        await message.channel.send("Tho, only selected one can only wield this divine sword!")
+        time.sleep(3)
+        await message.channel.send("Maybe it could be you, master!")
+
+    if message.statswith('$Murasame'):
+        await message.channel.send("That sword is from Terraria!")
 
     if msg.startswith('$quote'):
         quote = get_quote()
