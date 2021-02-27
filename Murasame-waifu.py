@@ -1,4 +1,5 @@
-import discord, os, time, requests, json, random
+import discord
+import os, time, requests, json, random
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -9,11 +10,9 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client()
 
-shutdown_words_head = ["!shutdown", "!Shutdown", "!SHUTDOWN"]
+shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
 shutdown_words_res = ["See ya!", "Love you, master!", "<3"]
-
 capital_M = ["$murasamemaru", "$murasama"]
-
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -66,7 +65,7 @@ async def on_message(message):
         time.sleep(3)
         await message.channel.send("Maybe it could be you, master!")
 
-    if message.statswith('$Murasame'):
+    if msg.startswith('$Murasame'):
         await message.channel.send("That sword is from Terraria!")
 
     if msg.startswith('$quote'):
