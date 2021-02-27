@@ -14,7 +14,7 @@ shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
 shutdown_words_res = ["See ya!", "Love you, master!", "<3"]
 capital_M = ["$murasamemaru", "$murasama"]
 command_help = ["$Help", "$help"]
-H_pics = ['OwO.png', 'OwO2.png']
+H_pics = ['OwO.png']
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -34,7 +34,7 @@ async def on_message(message):
     msg = message.content
 
     if msg.startswith('$help'):
-        await message.channel.send('Available commands : $quote, $Murasamemaru, $Murasama')
+        await message.channel.send('Available commands : $quote, $Murasamemaru, $Murasama, $info')
     elif msg.startswith('$Help'):
         await message.channel.send('Available commands : $quote, $Murasamemaru, $Murasama')
 
@@ -75,6 +75,9 @@ async def on_message(message):
     if msg.startswith('$quote'):
         quote = get_quote()
         await message.channel.send(quote)
+    
+    if msg.startswith('$info'):
+        await message.channel.send('Made by Gusbell l.#3973')
 
     if any(word in msg for word in shutdown_words_head):
         await message.channel.send(random.choice(shutdown_words_res))
