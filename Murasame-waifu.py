@@ -55,17 +55,18 @@ async def on_message(message):
         await message.channel.send("Hey! Don't forget to capitalize the M!!")
 
     if msg.startswith('$Murasamemaru'):
+        time.sleep(2)
         await message.channel.send("Hmmph, nice question.")
         time.sleep(4)
         await message.channel.send("Murasamemaru is a devine sword given to this village by the god.")
-        time.sleep(2)
+        time.sleep(3)
         await message.channel.send("They say that, this sword have potential to purified the curse spirit")
         time.sleep(2)
         await message.channel.send("Tho, only selected one can only wield this divine sword!")
         time.sleep(3)
         await message.channel.send("Maybe it could be you, master!")
 
-    if msg.startswith('$Murasame'):
+    if msg.startswith('$Murasama'):
         await message.channel.send("That sword is from Terraria!")
 
     if msg.startswith('$quote'):
