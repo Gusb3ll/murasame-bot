@@ -1,5 +1,5 @@
 import discord
-import os, time, requests, json, random, asyncio
+import os, requests, json, random, asyncio
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -24,7 +24,6 @@ def get_quote():
 
 @client.event
 async def on_ready():
-    channel = client.get_channel(814559928340447243)
     print('Murasame has logged in as {0.user}!'.format(client))
 
 @client.event
