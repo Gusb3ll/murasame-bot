@@ -11,10 +11,10 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 client = discord.Client()
 
 shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
-shutdown_words_res = ["See ya!", "Love you, master!", "<3"]
+shutdown_words_res = ["See ya!", "Love you, master!", "Goodbye, master"]
 capital_M = ["$murasamemaru", "$murasama"]
 command_help = ["$Help", "$help"]
-H_pics = ['OwO.png']
+H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'OwO4.png']
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -34,9 +34,9 @@ async def on_message(message):
     msg = message.content
 
     if msg.startswith('$help'):
-        await message.channel.send('Available commands : $quote, $Murasamemaru, $Murasama, $info')
+        await message.channel.send("Available commands : ```$quote $Murasamemaru $Murasama $info $18```")
     elif msg.startswith('$Help'):
-        await message.channel.send('Available commands : $quote, $Murasamemaru, $Murasama')
+        await message.channel.send('Available commands : ```$quote, $Murasamemaru, $Murasama, $info, $18```')
 
     if msg.startswith('Hi'):
         await message.channel.send('Hello, my master!')
@@ -77,7 +77,7 @@ async def on_message(message):
         await message.channel.send(quote)
     
     if msg.startswith('$info'):
-        await message.channel.send('Made by Gusbell l.#3973')
+        await message.channel.send('Made by Gusbell | https://github.com/Gusb3ll/murasame-bot')
 
     if any(word in msg for word in shutdown_words_head):
         await message.channel.send(random.choice(shutdown_words_res))
