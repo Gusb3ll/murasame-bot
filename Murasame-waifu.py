@@ -11,10 +11,11 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 client = discord.Client()
 
 shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
-shutdown_words_res = ["See ya!", "Love you, master!", "Goodbye, master"]
+shutdown_words_res = ["See ya!", "Goodbye, master", "See you later, master", "Well, goodbye then"]
 capital_M = ["$murasamemaru", "$murasama"]
 command_help = ["$Help", "$help"]
 H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'OwO4.png']
+gusbell_words = ["Gusbell is a god", "Hey! He is my master", "Why are you talking about him?"]
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -34,9 +35,11 @@ async def on_message(message):
     msg = message.content
 
     if msg.startswith('$help'):
-        await message.channel.send("Available commands : ```$quote $Murasamemaru $Murasama $info $18```")
+        await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
     elif msg.startswith('$Help'):
-        await message.channel.send('Available commands : ```$quote, $Murasamemaru, $Murasama, $info, $18```')
+        await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
+    elif msg.startswith('$HELP'):
+        await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
 
     if msg.startswith('Hi'):
         await message.channel.send('Hello, my master!')
@@ -56,6 +59,12 @@ async def on_message(message):
 
     if any(word in msg for word in capital_M):
         await message.channel.send("Hey! Don't forget to capitalize the **M**")
+
+    if msg.startswith('Gusbell'):
+        await message.channel.send(random.choice(gusbell_words))
+
+    if msg.startswith('OwO'):
+        await message.channel.send('OwO')
 
     if msg.startswith('$Murasamemaru'):
         await asyncio.sleep(2)
@@ -77,13 +86,19 @@ async def on_message(message):
         await message.channel.send(quote)
     
     if msg.startswith('$info'):
-        await message.channel.send('Made by Gusbell | https://github.com/Gusb3ll/murasame-bot')
-
-    if any(word in msg for word in shutdown_words_head):
-        await message.channel.send(random.choice(shutdown_words_res))
-        await client.logout()
+        await message.channel.send('Made by Gusbell to store his H-loli pictures collection | https://github.com/Gusb3ll/murasame-bot')
+    
+    if msg.startswith('$GusbellRightNow'):
+        await message.channel.send('Sleep')
     
     if msg.startswith('$18'):
         await message.channel.send(file=discord.File(random.choice(H_pics)))
+
+    if any(word in msg for word in shutdown_words_head):
+        if message.author.id == 297306376542224385:
+            await message.channel.send(random.choice(shutdown_words_res))
+            await client.logout()
+        else:
+            await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")
 
 client.run(TOKEN)
