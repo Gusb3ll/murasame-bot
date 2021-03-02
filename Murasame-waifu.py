@@ -50,13 +50,15 @@ async def on_message(message):
         await message.channel.send('Yes?')
     
     if client.user in message.mentions:
-        if msg.startswith('Shut up'):
-            await message.channel.send('No you shut up')
-        elif msg.startswith('Fuck you'):
+        if "Shut up" in message.content:
+            await message.channel.send('No you, shut up')
+        elif "Fuck you" in message.content:
             await message.channel.send('No, you go fuck yourself')
+        elif "nigger" in message.content:
+            await message.channel.send('bruh')
         else:
             await message.channel.send('Nya!')
-
+            
     if msg.startswith('Do you want to stay with me?'):
         await message.channel.send('Well, master...')
         await asyncio.sleep(3)
@@ -72,6 +74,9 @@ async def on_message(message):
 
     if msg.startswith('OwO'):
         await message.channel.send('OwO')
+
+    if msg.startswith('o/'):
+        await message.channel.send('\o/ \o/')
 
     if msg.startswith('$Murasamemaru'):
         await asyncio.sleep(2)
@@ -93,7 +98,7 @@ async def on_message(message):
         await message.channel.send(quote)
     
     if msg.startswith('$info'):
-        await message.channel.send('Made by Gusbell to store his H-loli pictures collection | https://github.com/Gusb3ll/murasame-bot')
+        await message.channel.send('Made by Gusbell to store his H-loli pictures collection and do more shitty lolicon stuff | https://github.com/Gusb3ll/murasame-bot')
     
     if msg.startswith('$GusbellRightNow'):
         await message.channel.send('Gusbell is fapping')
