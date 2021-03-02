@@ -1,5 +1,5 @@
 import discord
-import os, requests, json, random, asyncio
+import os, requests, json, random, asyncio, http.client, textwrap, lorem
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -7,7 +7,6 @@ env_path = Path('.', '.env')
 
 load_dotenv(dotenv_path=env_path)
 TOKEN = os.getenv('DISCORD_TOKEN')
-H_PICS = os.getenv('H_pics')
 
 client = discord.Client()
 
@@ -82,16 +81,17 @@ async def on_message(message):
         await message.channel.send('\o/ \o/')
 
     if msg.startswith('$Murasamemaru'):
-        await asyncio.sleep(2)
-        await message.channel.send("Hmmph, nice question")
-        await asyncio.sleep(4)
-        await message.channel.send("Murasamemaru is a devine sword given to this village by the god")
-        await asyncio.sleep(3)
-        await message.channel.send("They say that, this sword have potential to purified the curse spirit")
-        await asyncio.sleep(2)
-        await message.channel.send("Tho, only selected one can only wield this divine sword!")
-        await asyncio.sleep(3)
-        await message.channel.send("Maybe it could be you, master!")
+        async with message.channel.typing():
+            await asyncio.sleep(2)
+            await message.channel.send("Hmmph, nice question")
+            await asyncio.sleep(4)
+            await message.channel.send("Murasamemaru is a devine sword given to this village by the god")
+            await asyncio.sleep(3)
+            await message.channel.send("They say that, this sword have potential to purified the curse spirit")
+            await asyncio.sleep(2)
+            await message.channel.send("Tho, only selected one can only wield this divine sword")
+            await asyncio.sleep(5)
+            await message.channel.send("Maybe it could be you!")
 
     if msg.startswith('$Murasama'):
         await message.channel.send("That sword is from Terraria!")
@@ -105,7 +105,7 @@ async def on_message(message):
     
     if msg.startswith('$GusbellRightNow'):
         await message.channel.send('Gusbell is fapping')
-    
+
     if msg.startswith('$18'):
         await message.channel.send(file=discord.File(random.choice(H_pics), spoiler=True))
 
@@ -115,5 +115,15 @@ async def on_message(message):
             await client.logout()
         else:
             await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")
+    
+    if msg.startswith('$kill'):
+        if message.author.id == 297306376542224384:
+            await message.channel.send('AHHHHHH!!!!')
+            await client.logout()
+        else:
+            async with message.channel.typing():
+                await message.channel.send("You can't kill me!")
+                await asyncio.sleep(2)
+                await message.channel.send("I'm a ghost!")
 
 client.run(TOKEN)
