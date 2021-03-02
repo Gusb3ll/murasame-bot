@@ -7,6 +7,7 @@ env_path = Path('.', '.env')
 
 load_dotenv(dotenv_path=env_path)
 TOKEN = os.getenv('DISCORD_TOKEN')
+H_PICS = os.getenv('H_pics')
 
 client = discord.Client()
 
@@ -14,7 +15,7 @@ shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
 shutdown_words_res = ["See ya!", "Goodbye, master", "See you later, master", "Well, goodbye then"]
 capital_M = ["$murasamemaru", "$murasama"]
 command_help = ["$Help", "$help"]
-H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'ayase1.png', 'ayase2.png', 'ayase3.png', 'ayase4.png', 'ayase5.png', 'ayase6.png', 
+H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'ayase2.png', 'ayase3.png', 'ayase4.png', 'ayase5.png', 'ayase6.png', 
           'hazuki1.png', 'mayu1.png', 'mayu2.png', 'mayu3.png', 'Mako1.png', 'Mako2.png', 'Mura1.png', 'Mura2.png', 'Mura3.png',
           'Mura4.png', 'Mura5.png']
 gusbell_words = ["Gusbell is a god", "Hey! He is my **real** master", "Why are you talking about him?"]
@@ -53,6 +54,8 @@ async def on_message(message):
         if "Shut up" in message.content:
             await message.channel.send('No you, shut up')
         elif "Fuck you" in message.content:
+            await message.channel.send('No, you go fuck yourself')
+        elif "fuck you" in message.content:
             await message.channel.send('No, you go fuck yourself')
         elif "nigger" in message.content:
             await message.channel.send('bruh')
@@ -104,7 +107,7 @@ async def on_message(message):
         await message.channel.send('Gusbell is fapping')
     
     if msg.startswith('$18'):
-        await message.channel.send(file=discord.File(random.choice(H_pics)))
+        await message.channel.send(file=discord.File(random.choice(H_pics), spoiler=True))
 
     if any(word in msg for word in shutdown_words_head):
         if message.author.id == 297306376542224385:
