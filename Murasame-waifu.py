@@ -14,8 +14,10 @@ shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
 shutdown_words_res = ["See ya!", "Goodbye, master", "See you later, master", "Well, goodbye then"]
 capital_M = ["$murasamemaru", "$murasama"]
 command_help = ["$Help", "$help"]
-H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'OwO4.png']
-gusbell_words = ["Gusbell is a god", "Hey! He is my master", "Why are you talking about him?"]
+H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'ayase1.png', 'ayase2.png', 'ayase3.png', 'ayase4.png', 'ayase5.png', 'ayase6.png', 
+          'hazuki1.png', 'mayu1.png', 'mayu2.png', 'mayu3.png', 'Mako1.png', 'Mako2.png', 'Mura1.png', 'Mura2.png', 'Mura3.png',
+          'Mura4.png', 'Mura5.png']
+gusbell_words = ["Gusbell is a god", "Hey! He is my **real** master", "Why are you talking about him?"]
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -48,7 +50,12 @@ async def on_message(message):
         await message.channel.send('Yes?')
     
     if client.user in message.mentions:
-        await message.channel.send('Nya!')
+        if msg.startswith('Shut up'):
+            await message.channel.send('No you shut up')
+        elif msg.startswith('Fuck you'):
+            await message.channel.send('No, you go fuck yourself')
+        else:
+            await message.channel.send('Nya!')
 
     if msg.startswith('Do you want to stay with me?'):
         await message.channel.send('Well, master...')
@@ -89,7 +96,7 @@ async def on_message(message):
         await message.channel.send('Made by Gusbell to store his H-loli pictures collection | https://github.com/Gusb3ll/murasame-bot')
     
     if msg.startswith('$GusbellRightNow'):
-        await message.channel.send('Sleep')
+        await message.channel.send('Gusbell is fapping')
     
     if msg.startswith('$18'):
         await message.channel.send(file=discord.File(random.choice(H_pics)))
