@@ -1,5 +1,5 @@
 import discord
-import os, requests, json, random, asyncio, http.client, textwrap, lorem
+import os, requests, json, random, asyncio
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -106,6 +106,17 @@ async def on_message(message):
     if msg.startswith('$GusbellRightNow'):
         await message.channel.send('Gusbell is fapping')
 
+    if msg.startswith(' '):
+        await message.channel.send('Playing MaiMai D====>')
+    
+    if msg.startswith('$InstinctlyRightNow'):
+        await message.channel.send('How do I know?')
+        await asyncio.sleep(2)
+        await message.channel.send('dumbass')
+
+    if msg.startswith('$MirimRightNow'):
+        await message.channel.send('||Mirim is in love <3||')
+
     if msg.startswith('$18'):
         await message.channel.send(file=discord.File(random.choice(H_pics), spoiler=True))
 
@@ -117,13 +128,16 @@ async def on_message(message):
             await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")
     
     if msg.startswith('$kill'):
-        if message.author.id == 297306376542224384:
+        if message.author.id == 297306376542224385:
             await message.channel.send('AHHHHHH!!!!')
             await client.logout()
         else:
-            async with message.channel.typing():
-                await message.channel.send("You can't kill me!")
-                await asyncio.sleep(2)
-                await message.channel.send("I'm a ghost!")
+            await message.channel.send("You can't kill me!")
+            await asyncio.sleep(2)
+            await message.channel.send("I'm a ghost!")
 
+    if msg.startswith('$join'):
+        channel = message.author.voice.channel
+        await channel.connect()
+        
 client.run(TOKEN)
