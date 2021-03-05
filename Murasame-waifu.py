@@ -1,5 +1,6 @@
 import discord
 import os, requests, json, random, asyncio
+from etc import picture, words
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -7,17 +8,9 @@ env_path = Path('.', '.env')
 
 load_dotenv(dotenv_path=env_path)
 TOKEN = os.getenv('DISCORD_TOKEN')
+SECRET_KEY = os.getenv('SECRET')
 
 client = discord.Client()
-
-shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
-shutdown_words_res = ["See ya!", "Goodbye, master", "See you later, master", "Well, goodbye then"]
-capital_M = ["$murasamemaru", "$murasama"]
-command_help = ["$Help", "$help"]
-H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'ayase2.png', 'ayase3.png', 'ayase4.png', 'ayase5.png', 'ayase6.png', 
-          'hazuki1.png', 'mayu1.png', 'mayu2.png', 'mayu3.png', 'Mako1.png', 'Mako2.png', 'Mura1.png', 'Mura2.png', 'Mura3.png',
-          'Mura4.png', 'Mura5.png']
-gusbell_words = ["Gusbell is a god", "Hey! He is my **real** master", "Why are you talking about him?"]
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -68,11 +61,11 @@ async def on_message(message):
         await asyncio.sleep(3)
         await message.channel.send('Hehe hehe')
 
-    if any(word in msg for word in capital_M):
+    if any(word in msg for word in words.capital_M):
         await message.channel.send("Hey! Don't forget to capitalize the **M**")
 
     if msg.startswith('Gusbell'):
-        await message.channel.send(random.choice(gusbell_words))
+        await message.channel.send(random.choice(words.gusbell_words))
 
     if msg.startswith('OwO'):
         await message.channel.send('OwO')
@@ -106,7 +99,7 @@ async def on_message(message):
     if msg.startswith('$GusbellRightNow'):
         await message.channel.send('Gusbell is fapping')
 
-    if msg.startswith(' '):
+    if msg.startswith('$BechamRightNow'):
         await message.channel.send('Playing MaiMai D====>')
     
     if msg.startswith('$InstinctlyRightNow'):
@@ -118,11 +111,11 @@ async def on_message(message):
         await message.channel.send('||Mirim is in love <3||')
 
     if msg.startswith('$18'):
-        await message.channel.send(file=discord.File(random.choice(H_pics), spoiler=True))
+        await message.channel.send(file=discord.File(random.choice(picture.H_pics), spoiler=True))
 
-    if any(word in msg for word in shutdown_words_head):
+    if any(word in msg for word in words.shutdown_words_head):
         if message.author.id == 297306376542224385:
-            await message.channel.send(random.choice(shutdown_words_res))
+            await message.channel.send(random.choice(words.shutdown_words_res))
             await client.logout()
         else:
             await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")

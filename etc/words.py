@@ -1,0 +1,5 @@
+shutdown_words_head = ["$shutdown", "$Shutdown", "$SHUTDOWN"]
+shutdown_words_res = ["See ya!", "Goodbye, master", "See you later, master", "Well, goodbye then"]
+capital_M = ["$murasamemaru", "$murasama"]
+command_help = ["$Help", "$help"]
+gusbell_words = ["Gusbell is a god", "Hey! He is my **real** master", "Why are you talking about him?"]
