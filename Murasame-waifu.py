@@ -101,23 +101,27 @@ async def on_message(message):
         await message.channel.send('||Mirim is in love <3||')
 
     if msg.startswith('$18'):
-        await message.channel.send(file=discord.File(random.choice(picture.H_pics), spoiler=True))
+        await message.channel.send(file=discord.File(random.choice(picture.H_pictures), spoiler=True))
 
     if any(word in msg for word in words.Shutdown_words_start):
         if message.author.id == 297306376542224385:
             await message.channel.send(random.choice(words.Shutdown_words_response))
             await client.logout()
         else:
-            await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")
+            async with message.channel.typing():
+                await asyncio.sleep(1)
+                await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")
     
     if msg.startswith('$kill'):
         if message.author.id == 297306376542224385:
             await message.channel.send('AHHHHHH!!!!')
             await client.logout()
         else:
-            await message.channel.send("You can't kill me!")
-            await asyncio.sleep(2)
-            await message.channel.send("I'm a ghost!")
+            async with message.channel.typing():
+                await asyncio.sleep(2)
+                await message.channel.send("You can't kill me!")
+                await asyncio.sleep(1)
+                await message.channel.send("I'm a ghost!")
 
     if msg.startswith('$join'):
         channel = message.author.voice.channel

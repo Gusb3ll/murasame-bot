@@ -1,3 +1,5 @@
-H_pics = ['OwO.png', 'OwO2.png', 'OwO3.png', 'ayase2.png', 'ayase3.png', 'ayase4.png', 'ayase5.png', 'ayase6.png',
-          'hazuki1.png', 'mayu1.png', 'mayu2.png', 'mayu3.png', 'Mako1.png', 'Mako2.png', 'Mura1.png', 'Mura2.png', 'Mura3.png',
-          'Mura4.png', 'Mura5.png']
+H_pictures = ['Murasame1.png', 'Murasame2.png', 'Murasame3.png', 'Murasame4.png', 'Murasame5.png', 'Murasame6.png', 'Murasame7.png', 'Murasame8.png',
+              'Ayase1.png', 'Ayase2.png', 'Ayase3.png', 'Ayase4.png', 'Ayase5.png',
+              'Hazuki1.png',
+              'Mako1.png', 'Mako2.png',
+              'Mayu1.png', 'Mayu2.png', 'Mayu3.png']
