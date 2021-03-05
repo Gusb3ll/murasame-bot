@@ -29,11 +29,7 @@ async def on_message(message):
 
     msg = message.content
 
-    if msg.startswith('$help'):
-        await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
-    elif msg.startswith('$Help'):
-        await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
-    elif msg.startswith('$HELP'):
+    if any(word in msg for word in words.Help_words):
         await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
 
     if msg.startswith('Hi'):
@@ -43,14 +39,8 @@ async def on_message(message):
         await message.channel.send('Yes?')
     
     if client.user in message.mentions:
-        if "Shut up" in message.content:
-            await message.channel.send('No you, shut up')
-        elif "Fuck you" in message.content:
-            await message.channel.send('No, you go fuck yourself')
-        elif "fuck you" in message.content:
-            await message.channel.send('No, you go fuck yourself')
-        elif "nigger" in message.content:
-            await message.channel.send('bruh')
+        if any(word in msg for word in words.Bad_words):
+            await message.channel.send(random.choice(words.Bad_words_response))
         else:
             await message.channel.send('Nya!')
             
@@ -61,11 +51,11 @@ async def on_message(message):
         await asyncio.sleep(3)
         await message.channel.send('Hehe hehe')
 
-    if any(word in msg for word in words.capital_M):
+    if any(word in msg for word in words.Capital_M):
         await message.channel.send("Hey! Don't forget to capitalize the **M**")
 
     if msg.startswith('Gusbell'):
-        await message.channel.send(random.choice(words.gusbell_words))
+        await message.channel.send(random.choice(words.Gusbell_words))
 
     if msg.startswith('OwO'):
         await message.channel.send('OwO')
@@ -113,9 +103,9 @@ async def on_message(message):
     if msg.startswith('$18'):
         await message.channel.send(file=discord.File(random.choice(picture.H_pics), spoiler=True))
 
-    if any(word in msg for word in words.shutdown_words_head):
+    if any(word in msg for word in words.Shutdown_words_start):
         if message.author.id == 297306376542224385:
-            await message.channel.send(random.choice(words.shutdown_words_res))
+            await message.channel.send(random.choice(words.Shutdown_words_response))
             await client.logout()
         else:
             await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")
