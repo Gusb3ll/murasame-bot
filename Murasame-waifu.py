@@ -30,7 +30,6 @@ def get_VisualNovel(owo):
     vndb = VNDB(config=config)
     vns = vndb.get_all_vn(VN.id == owo)
     vn = vns[0]
-    print(vn.title)
     return vn.title
 
 @client.event
@@ -48,7 +47,7 @@ async def on_message(message):
         await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
 
     if msg.startswith('Hi'):
-        await message.channel.send('Hello, my master!')
+        await message.channel.send(words.Hello_words)
 
     if msg.startswith('Murasame'):
         await message.channel.send('Yes?')
@@ -152,8 +151,10 @@ async def on_message(message):
         id = message.content[4:]
         print(id)
         response = get_VisualNovel(id)
+        print(response)
         await asyncio.sleep(0.5)
         await message.channel.send(response)
+
 
     if msg.startswith('$join'):
         channel = message.author.voice.channel
