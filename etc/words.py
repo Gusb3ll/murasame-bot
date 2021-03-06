@@ -5,3 +5,4 @@ Gusbell_words = ["Gusbell is a god", "Hey! He is my **real** master", "Why are y
 Help_words = ["$help", "$Help", "$HELP"]
 Bad_words = ["fuck", "fuck you", "shit", "fuckyou", "dumbass", "you hoe", "hoe", "go to hell", "Nigga", "nigga", "Niggas", "niggas"]
 Bad_words_response = ["Go fuck yourselve!", "No, fuck yourselve", "Bruh", "Why are you telling bad words?", "Sadge", "Picture of dumbass saying bad words"]
+Kill_words = ["$kill", "$Kill"]
