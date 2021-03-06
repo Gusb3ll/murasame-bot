@@ -1,8 +1,14 @@
 import discord
 import os, requests, json, random, asyncio
+
 from etc import picture, words
+
+from discord.ext import commands
 from pathlib import Path
 from dotenv import load_dotenv
+from vndb_thigh_highs import VNDB, Config
+from vndb_thigh_highs.models import VN
+from vndb_thigh_highs.cache import Cache
 
 env_path = Path('.', '.env')
 
@@ -17,6 +23,15 @@ def get_quote():
     json_data = json.loads(response.text)
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return(quote)
+
+def get_VisualNovel(owo):
+    config = Config()
+    config.cache = Cache("etc/VN_Cache.json")
+    vndb = VNDB(config=config)
+    vns = vndb.get_all_vn(VN.id == owo)
+    vn = vns[0]
+    print(vn.title)
+    return vn.title
 
 @client.event
 async def on_ready():
@@ -77,7 +92,10 @@ async def on_message(message):
             await message.channel.send("Maybe it could be you!")
 
     if msg.startswith('$Murasama'):
-        await message.channel.send("That sword is from Terraria!")
+        await message.channel.send("That sword is from Terraria!") 
+
+    if msg.startswith('Recommend me a game'):
+        await message.channel.send('https://store.steampowered.com/app/1144400/SenrenBanka/')
 
     if msg.startswith('$quote'):
         quote = get_quote()
@@ -100,6 +118,13 @@ async def on_message(message):
     if msg.startswith('$MirimRightNow'):
         await message.channel.send('||Mirim is in love <3||')
 
+    if msg.startswith('$Flynny'):
+        await message.channel.send('More like')
+        await asyncio.sleep(2)
+        await message.channel.send('ProjectAce')
+        await asyncio.sleep(1)
+        await message.channel.send('or ACE')
+
     if msg.startswith('$18'):
         await message.channel.send(file=discord.File(random.choice(picture.H_pictures), spoiler=True))
 
@@ -112,7 +137,7 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await message.channel.send("You don't have permission to use this command, only **Gusbell** can!")
     
-    if msg.startswith('$kill'):
+    if any(word in msg for word in words.Kill_words):
         if message.author.id == 297306376542224385:
             await message.channel.send('AHHHHHH!!!!')
             await client.logout()
@@ -122,6 +147,13 @@ async def on_message(message):
                 await message.channel.send("You can't kill me!")
                 await asyncio.sleep(1)
                 await message.channel.send("I'm a ghost!")
+        
+    if msg.startswith('$vn'):
+        id = message.content[4:]
+        print(id)
+        response = get_VisualNovel(id)
+        await asyncio.sleep(0.5)
+        await message.channel.send(response)
 
     if msg.startswith('$join'):
         channel = message.author.voice.channel
