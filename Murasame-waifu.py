@@ -60,7 +60,7 @@ async def on_message(message):
     msg = message.content
 
     if any(word in msg for word in words.Help_words):
-        await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18```')
+        await message.channel.send('Available commands : ```$quote $Murasamemaru $Murasama $info $18 $vn```')
 
     if msg.startswith('Hi'):
         await message.channel.send(words.Hello_words)
@@ -165,14 +165,17 @@ async def on_message(message):
         
     if msg.startswith('$vn'):
         if message.content[4:] == "":
-            await message.channel.send("You need to input the Visual Novel name!")
+            await message.channel.send("You need to give me the visual novel name!")
+            await asyncio.sleep(1)
+            await message.channel.send('```Example : Senren * Banka```')
         else:
-            id = message.content[4:]
-            print(id)
-            response = get_VisualNovel(id)
-            print(response)
-            await asyncio.sleep(0.5)
-            await message.channel.send(response)
+            async with message.channel.typing():
+                id = message.content[4:]
+                print(id)
+                response = get_VisualNovel(id)
+                print(response)
+                await asyncio.sleep(0.5)
+                await message.channel.send(response)
 
     if msg.startswith('$dbstats'):
         stats = get_database_stats()
