@@ -1,3 +1,5 @@
+### MADE BY GUSBELL ###
+
 import discord
 import os, requests, json, random, asyncio
 
@@ -11,14 +13,16 @@ from vndb_thigh_highs.models.operators import search
 from vndb_thigh_highs.cache import Cache
 
 env_path = Path('.', '.env')
-pic_path = Path('/etc')
 
 load_dotenv(dotenv_path=env_path)
 TOKEN = os.getenv('DISCORD_TOKEN')
 SECRET_KEY = os.getenv('SECRET')
+VNDB_USER = os.getenv('VNDB_user')
 VNDB_PASSWORD = os.getenv('VNDB_pass')
 
 client = discord.Client()
+
+### BOT FUNCTION ###
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -28,7 +32,7 @@ def get_quote():
 
 def get_VisualNovel(owo):
     config = Config()
-    config.set_login("Gusbell", VNDB_PASSWORD)
+    config.set_login(VNDB_USER, VNDB_PASSWORD)
     config.cache = Cache("etc/VN_Cache.json")
     vndb = VNDB(config=config)
     vn_search = vndb.get_vn(search(VN.title, owo))
@@ -37,10 +41,12 @@ def get_VisualNovel(owo):
 
 def get_database_stats():
     config = Config()
-    config.set_login("Gusbell", VNDB_PASSWORD)
+    config.set_login(VNDB_USER, VNDB_PASSWORD)
     vndb = VNDB(config=config)
-    vndb_db_stats = vndb.dbstats()
-    return vndb_db_stats
+    vndb_stats = vndb.dbstats()
+    return vndb_stats
+
+### END OF BOT FUNCTION ###
 
 @client.event
 async def on_ready():
@@ -179,3 +185,5 @@ async def on_message(message):
         await channel.connect()
         
 client.run(TOKEN)
+
+##############################
