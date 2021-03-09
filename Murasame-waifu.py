@@ -3,18 +3,20 @@ import os, requests, json, random, asyncio
 
 from etc import picture, words
 
-from discord.ext import commands
 from pathlib import Path
 from dotenv import load_dotenv
 from vndb_thigh_highs import VNDB, Config
 from vndb_thigh_highs.models import VN
+from vndb_thigh_highs.models.operators import search
 from vndb_thigh_highs.cache import Cache
 
 env_path = Path('.', '.env')
+pic_path = Path('/etc')
 
 load_dotenv(dotenv_path=env_path)
 TOKEN = os.getenv('DISCORD_TOKEN')
 SECRET_KEY = os.getenv('SECRET')
+VNDB_PASSWORD = os.getenv('VNDB_pass')
 
 client = discord.Client()
 
@@ -26,11 +28,19 @@ def get_quote():
 
 def get_VisualNovel(owo):
     config = Config()
+    config.set_login("Gusbell", VNDB_PASSWORD)
     config.cache = Cache("etc/VN_Cache.json")
     vndb = VNDB(config=config)
-    vns = vndb.get_all_vn(VN.id == owo)
-    vn = vns[0]
+    vn_search = vndb.get_vn(search(VN.title, owo))
+    vn = vn_search[0]
     return vn.title
+
+def get_database_stats():
+    config = Config()
+    config.set_login("Gusbell", VNDB_PASSWORD)
+    vndb = VNDB(config=config)
+    vndb_db_stats = vndb.dbstats()
+    return vndb_db_stats
 
 @client.event
 async def on_ready():
@@ -65,6 +75,9 @@ async def on_message(message):
         await asyncio.sleep(3)
         await message.channel.send('Hehe hehe')
 
+    if msg.startswith('Why'):
+        await message.channel.send("I don't know")
+
     if any(word in msg for word in words.Capital_M):
         await message.channel.send("Hey! Don't forget to capitalize the **M**")
 
@@ -73,9 +86,6 @@ async def on_message(message):
 
     if msg.startswith('OwO'):
         await message.channel.send('OwO')
-
-    if msg.startswith('o/'):
-        await message.channel.send('\o/ \o/')
 
     if msg.startswith('$Murasamemaru'):
         async with message.channel.typing():
@@ -104,7 +114,7 @@ async def on_message(message):
         await message.channel.send('Made by Gusbell to store his H-loli pictures collection and do more shitty lolicon stuff | https://github.com/Gusb3ll/murasame-bot')
     
     if msg.startswith('$GusbellRightNow'):
-        await message.channel.send('Gusbell is fapping')
+        await message.channel.send('Gusbell is reading H-Loli-Book')
 
     if msg.startswith('$BechamRightNow'):
         await message.channel.send('Playing MaiMai D====>')
@@ -148,13 +158,21 @@ async def on_message(message):
                 await message.channel.send("I'm a ghost!")
         
     if msg.startswith('$vn'):
-        id = message.content[4:]
-        print(id)
-        response = get_VisualNovel(id)
-        print(response)
-        await asyncio.sleep(0.5)
-        await message.channel.send(response)
+        if message.content[4:] == "":
+            await message.channel.send("You need to input the Visual Novel name!")
+        else:
+            id = message.content[4:]
+            print(id)
+            response = get_VisualNovel(id)
+            print(response)
+            await asyncio.sleep(0.5)
+            await message.channel.send(response)
 
+    if msg.startswith('$dbstats'):
+        stats = get_database_stats()
+        await message.channel.send("Statics for VNDB database :")
+        await asyncio.sleep(1)
+        await message.channel.send(stats)
 
     if msg.startswith('$join'):
         channel = message.author.voice.channel
