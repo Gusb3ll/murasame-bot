@@ -23,3 +23,5 @@ etc/__pycache__/picture.cpython-39.pyc
 etc/__pycache__/words.cpython-39.pyc
 etc/VN_Cache.json
 .gitignore
+rich.png
+etc/__pycache__/rich.cpython-39.pyc
