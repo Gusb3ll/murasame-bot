@@ -3,7 +3,7 @@
 import discord
 import os, requests, json, random, asyncio
 
-from etc import picture, words
+from etc import picture, words, rich
 
 from pathlib import Path
 from dotenv import load_dotenv
@@ -83,6 +83,11 @@ async def on_message(message):
 
     if msg.startswith('Why'):
         await message.channel.send("I don't know")
+
+    if msg.startswith('Sex'):
+        await message.channel.send('Sex?')
+        await asyncio.sleep(1)
+        await message.channel.send('What?')
 
     if any(word in msg for word in words.Capital_M):
         await message.channel.send("Hey! Don't forget to capitalize the **M**")
@@ -182,6 +187,10 @@ async def on_message(message):
         await message.channel.send("Statics for VNDB database :")
         await asyncio.sleep(1)
         await message.channel.send(stats)
+
+    if msg.startswith('$rich'):
+        rich.Google()
+        await message.channel.send(file=discord.File('rich.png'))
 
     if msg.startswith('$join'):
         channel = message.author.voice.channel
