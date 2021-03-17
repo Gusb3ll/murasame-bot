@@ -124,8 +124,8 @@ async def on_message(message):
     if msg.startswith('$info'):
         await message.channel.send('Made by Gusbell to store his H-loli pictures collection and do more shitty lolicon stuff | https://github.com/Gusb3ll/murasame-bot')
     
-    if msg.startswith('$GusbellRightNow'):
-        await message.channel.send('Gusbell is reading H-Loli-Book')
+    if msg.startswith('$GusbellRightNow') or msg.startswith('$Gusbell'):
+        await message.channel.send('Gusbell is playing Apex legend')
 
     if msg.startswith('$BechamRightNow'):
         await message.channel.send('Playing MaiMai D====>')
@@ -189,8 +189,18 @@ async def on_message(message):
         await message.channel.send(stats)
 
     if msg.startswith('$rich'):
-        rich.Google()
-        await message.channel.send(file=discord.File('rich.png'))
+        if message.content[6:] == "Google":
+            rich.Google()
+            await message.channel.send(file=discord.File('rich1.png'))
+            await asyncio.sleep(1)
+            os.remove("rich1.png")
+        elif message.content[6:] == "Tesla":
+            rich.Tesla()
+            await message.channel.send(file=discord.File('rich2.png'))
+            await asyncio.sleep(1)
+            os.remove("rich2.png")
+        else:
+            await message.channel.send("No stock founded")
 
     if msg.startswith('$join'):
         channel = message.author.voice.channel
