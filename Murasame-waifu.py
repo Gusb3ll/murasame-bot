@@ -148,6 +148,9 @@ async def on_message(message):
     if msg.startswith('$18'):
         await message.channel.send(file=discord.File(random.choice(picture.H_pictures), spoiler=True))
 
+    if msg.startswith('$test'):
+        await message.channel.send(file=discord.File(random.choice(picture.TEST_pic), spoiler=True))
+
     if any(word in msg for word in words.Shutdown_words_start):
         if message.author.id == 297306376542224385:
             await message.channel.send(random.choice(words.Shutdown_words_response))
