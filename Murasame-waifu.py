@@ -205,6 +205,9 @@ async def on_message(message):
     if msg.startswith('$join'):
         channel = message.author.voice.channel
         await channel.connect()
+
+    if msg.startswith('$minecraft'):
+        await message.chenn
         
 client.run(TOKEN)
 
